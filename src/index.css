@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'JetBrains Mono', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-dark-900 text-neon-cyan transition-colors duration-300;
+    background: 
+      radial-gradient(ellipse at top, rgba(0, 255, 255, 0.1) 0%, transparent 70%),
+      radial-gradient(ellipse at bottom, rgba(255, 0, 128, 0.1) 0%, transparent 70%),
+      #0a0a0a;
+  }
+
+  /* Neon scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #00ffff, #ff0080);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  }
+
+  /* Hide scrollbar for specific elements */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-lg bg-dark-800/30 border-2;
+    border-image: linear-gradient(45deg, #00ffff, #ff0080, #00ff41) 1;
+    box-shadow: 
+      0 0 20px rgba(0, 255, 255, 0.3),
+      inset 0 0 20px rgba(0, 255, 255, 0.1);
+  }
+  
+  .neon-glass {
+    @apply backdrop-blur-lg bg-dark-800/20 border-2 rounded-2xl;
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow: 
+      0 0 30px rgba(0, 255, 255, 0.4),
+      inset 0 0 30px rgba(0, 255, 255, 0.1),
+      0 0 60px rgba(255, 0, 128, 0.2);
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-cyan via-neon-pink to-neon-green bg-clip-text text-transparent animate-neon-pulse;
+  }
+  
+  .neon-text {
+    color: #00ffff;
+    text-shadow: 
+      0 0 5px #00ffff,
+      0 0 10px #00ffff,
+      0 0 15px #00ffff,
+      0 0 20px #00ffff;
+    animation: neon-pulse 2s ease-in-out infinite alternate;
+  }
+  
+  .typing-cursor {
+    @apply inline-block w-0.5 h-6 bg-neon-cyan;
+    box-shadow: 0 0 10px #00ffff;
+    animation: text-flicker 0.5s ease-in-out infinite alternate;
+  }
+  
+  .neon-button {
+    @apply relative px-6 py-3 font-bold text-neon-cyan uppercase tracking-wider;
+    background: transparent;
+    border: 2px solid #00ffff;
+    box-shadow: 
+      0 0 20px rgba(0, 255, 255, 0.4),
+      inset 0 0 20px rgba(0, 255, 255, 0.1);
+    text-shadow: 0 0 10px #00ffff;
+    transition: all 0.3s ease;
+  }
+  
+  .neon-button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 
+      0 0 30px rgba(0, 255, 255, 0.6),
+      inset 0 0 30px rgba(0, 255, 255, 0.2),
+      0 0 60px rgba(0, 255, 255, 0.4);
+    text-shadow: 0 0 15px #00ffff;
+  }
+  
+  .neon-input {
+    @apply bg-dark-800/50 border-2 text-neon-cyan rounded-lg px-4 py-3;
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 
+      0 0 15px rgba(0, 255, 255, 0.2),
+      inset 0 0 15px rgba(0, 255, 255, 0.05);
+  }
+  
+  .neon-input:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 
+      0 0 25px rgba(0, 255, 255, 0.5),
+      inset 0 0 25px rgba(0, 255, 255, 0.1);
+  }
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.word-correct {
+  color: #00ff41;
+  text-shadow: 
+    0 0 5px #00ff41,
+    0 0 10px #00ff41,
+    0 0 15px #00ff41;
+  animation: neon-pulse 1s ease-in-out;
+}
+
+.word-incorrect {
+  color: #ff0080;
+  text-shadow: 
+    0 0 5px #ff0080,
+    0 0 10px #ff0080,
+    0 0 15px #ff0080;
+  background: rgba(255, 0, 128, 0.1);
+  border-radius: 4px;
+  animation: text-flicker 0.2s ease-in-out 3;
+}
+
+.word-current {
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid rgba(0, 255, 255, 0.5);
+  border-radius: 6px;
+  padding: 2px 4px;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 255, 0.3),
+    inset 0 0 15px rgba(0, 255, 255, 0.1);
+  animation: neon-glow 1.5s ease-in-out infinite alternate;
+}
+
+.char-correct {
+  color: #00ff41;
+  text-shadow: 
+    0 0 3px #00ff41,
+    0 0 6px #00ff41;
+  transition: all 0.2s ease;
+}
+
+.char-incorrect {
+  color: #ff0080;
+  text-shadow: 
+    0 0 3px #ff0080,
+    0 0 6px #ff0080;
+  background: rgba(255, 0, 128, 0.2);
+  border-radius: 2px;
+}
+
+.char-current {
+  background: #00ffff;
+  color: #0a0a0a;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #00ffff;
+  animation: text-flicker 0.3s ease-in-out infinite alternate;
+}
+
+.char-pending {
+  color: rgba(0, 255, 255, 0.6);
+  text-shadow: 0 0 2px rgba(0, 255, 255, 0.3);
+}
+
+.typing-word {
+  @apply font-mono text-xl;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.typing-word:hover {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor;
+}
